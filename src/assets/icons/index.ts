@@ -1,0 +1,8 @@
+export { BrushIcon } from './BrushIcon'
+export { RectIcon } from './RectIcon'
+export { CircleIcon } from './CircleIcon'
+export { EraserIcon } from './EraserIcon'
+export { LineIcon } from './LineIcon'
+export { UndoIcon } from './UndoIcon'
+export { RedoIcon } from './RedoIcon'
+export { SaveIcon } from './SaveIcon'
