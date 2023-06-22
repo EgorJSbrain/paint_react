@@ -1,6 +1,7 @@
-import Canvas from './components/Canvas'
-import SettingsBar from './components/SettingsBar'
-import Toolbar from './components/Toolbar'
+import Canvas from '@/components/Canvas'
+import SettingsBar from '@/components/SettingsBar'
+import Toolbar from '@/components/Toolbar'
+
 import './styles/app.scss'
 
 const App = () => {
