@@ -16,7 +16,7 @@ class Brush extends Tool {
     this.canvas?.addEventListener('mousemove', this.mouseMoveHandler.bind(this))
   }
 
-  mouseUpHandler(e: any) {
+  mouseUpHandler() {
     this.mouseDown = false
   }
 
