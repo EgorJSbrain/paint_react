@@ -14,6 +14,7 @@ import Brush from "@/tools/Brush";
 import canvasState from "@/store/canvasState";
 import toolState from "@/store/toolState";
 import Rect from "@/tools/Rect";
+import Circle from "@/tools/Circle";
 
 const enum Tools {
   brush = "brush",
@@ -34,6 +35,9 @@ const Toolbar = () => {
           break;
         case Tools.rect:
           tool = new Rect(canvasState.canvas)
+          break;
+        case Tools.circle:
+          tool = new Circle(canvasState.canvas)
           break;
         default:
           return undefined

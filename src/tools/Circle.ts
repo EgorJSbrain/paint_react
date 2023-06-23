@@ -1,6 +1,6 @@
 import Tool from "./Tool"
 
-class Rect extends Tool {
+class Circle extends Tool {
   mouseDown: boolean = false
   canvas: HTMLCanvasElement | null = null
   startX = 0
@@ -39,12 +39,13 @@ class Rect extends Tool {
       let currentY = e.pageY - e.target.offsetTop
       let width = currentX - this.startX
       let height = currentY - this.startY
+      let radius = Math.sqrt(width ** 2 + height ** 2)
 
-      this.draw(this.startX, this.startY, width, height)
+      this.draw(this.startX, this.startY, radius)
     }
   }
 
-  draw(x: number, y: number, w: number, h: number) {
+  draw(x: number, y: number, radius: number) {
     const img = new Image()
     img.src = this.saved
 
@@ -52,11 +53,11 @@ class Rect extends Tool {
       this.ctx?.clearRect(0, 0, this.canvas?.width ?? 0, this.canvas?.height ?? 0)
       this.ctx?.drawImage(img, 0, 0, this.canvas?.width ?? 0, this.canvas?.height ?? 0)
       this.ctx?.beginPath()
-      this.ctx?.rect(x, y, w, h)
-      this.ctx?.fill()
+      this.ctx?.arc(x, y, radius, 0, 2 * Math.PI)
+      // this.ctx?.fill() // TODO add functionality for filling
       this.ctx?.stroke()
     }
   }
 }
 
-export default Rect
+export default Circle
