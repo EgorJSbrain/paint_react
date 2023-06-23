@@ -11,15 +11,9 @@ class Brush extends Tool {
   }
 
   listen() {
-    // this.canvas?.addEventListener('onmouseup', this.mouseUpHandler)
-    // this.canvas?.addEventListener('onmousedown', this.mouseDownHandler)
-    // this.canvas?.addEventListener('onmousemove', this.mouseMoveHandler)
-    // if (this.canvas) {
-    //   this.canvas?.onmousedown = this.mouseDownHandler.bind(this)
-    // }
-    // this.canvas?.onmouseup = this.mouseUpHandler.bind(this)
-    // this.canvas?.onmousedown = this.mouseDownHandler.bind(this)
-    // this.canvas?.onmousemove = this.mouseMoveHandler.bind(this)
+    this.canvas?.addEventListener('mouseup', this.mouseUpHandler.bind(this))
+    this.canvas?.addEventListener('mousedown', this.mouseDownHandler.bind(this))
+    this.canvas?.addEventListener('mousemove', this.mouseMoveHandler.bind(this))
   }
 
   mouseUpHandler(e: any) {
@@ -27,7 +21,6 @@ class Brush extends Tool {
   }
 
   mouseDownHandler(e: any) {
-    debugger
     this.mouseDown = true
     this.ctx?.beginPath()
     this.ctx?.moveTo(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop)
@@ -40,9 +33,8 @@ class Brush extends Tool {
   }
 
   draw(x: number, y: number) {
-    this.ctx?.moveTo(x, y)
+    this.ctx?.lineTo(x, y)
     this.ctx?.stroke()
-    console.log('------DRAW')
   }
 }
 

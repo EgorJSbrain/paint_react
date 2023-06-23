@@ -9,13 +9,9 @@ class Tool {
   }
 
   destroyEvents() {
-    // this.canvas?.addEventListener('onmouseup', () => {})
-    // //@ts-ignore
-    // this.canvas?.onmouseup = null
-    // //@ts-ignore
-    // this.canvas?.onmousedown = null
-    // //@ts-ignore
-    // this.canvas?.onmousemove = null
+    this.canvas?.removeEventListener('mouseup', () => {})
+    this.canvas?.removeEventListener('mousedown', () => {})
+    this.canvas?.removeEventListener('mousemove', () => {})
   }
 
 }
