@@ -14,9 +14,9 @@ class Circle extends Tool {
   }
 
   listen() {
-    this.canvas?.addEventListener('mouseup', this.mouseUpHandler.bind(this))
-    this.canvas?.addEventListener('mousedown', this.mouseDownHandler.bind(this))
-    this.canvas?.addEventListener('mousemove', this.mouseMoveHandler.bind(this))
+    this.canvas!.onmousemove = this.mouseMoveHandler.bind(this);
+    this.canvas!.onmousedown = this.mouseDownHandler.bind(this);
+    this.canvas!.onmouseup = this.mouseUpHandler.bind(this);
   }
 
   mouseUpHandler() {
@@ -54,7 +54,7 @@ class Circle extends Tool {
       this.ctx?.drawImage(img, 0, 0, this.canvas?.width ?? 0, this.canvas?.height ?? 0)
       this.ctx?.beginPath()
       this.ctx?.arc(x, y, radius, 0, 2 * Math.PI)
-      // this.ctx?.fill() // TODO add functionality for filling
+      this.ctx?.fill() // TODO add functionality for filling
       this.ctx?.stroke()
     }
   }

@@ -9,12 +9,15 @@ import {
   SaveIcon,
 } from "@/assets/icons";
 
-import "../styles/toolbar.scss";
 import Brush from "@/tools/Brush";
 import canvasState from "@/store/canvasState";
 import toolState from "@/store/toolState";
 import Rect from "@/tools/Rect";
 import Circle from "@/tools/Circle";
+import Line from "@/tools/Line";
+import Eraser from "@/tools/Eraser";
+
+import "../styles/toolbar.scss";
 
 const enum Tools {
   brush = "brush",
@@ -25,6 +28,11 @@ const enum Tools {
 }
 
 const Toolbar = () => {
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    toolState.setFillColor(e.target.value)
+    toolState.setStrokeColor(e.target.value)
+  }
+
   const setTool = (toolType: Tools) => () => {
     let tool;
 
@@ -38,6 +46,12 @@ const Toolbar = () => {
           break;
         case Tools.circle:
           tool = new Circle(canvasState.canvas)
+          break;
+        case Tools.line:
+          tool = new Line(canvasState.canvas)
+          break;
+        case Tools.eraser:
+          tool = new Eraser(canvasState.canvas)
           break;
         default:
           return undefined
@@ -64,7 +78,7 @@ const Toolbar = () => {
         <button className="toolbar__btn" onClick={setTool(Tools.line)}>
           <LineIcon />
         </button>
-        <input type="color"/>
+        <input onChange={handleColorChange} type="color"/>
       </div>
 
       <div>
