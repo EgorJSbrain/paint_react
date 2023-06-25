@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, MouseEvent } from 'react'
 import { observer } from 'mobx-react-lite'
 
 import '../styles/canvas.scss'
@@ -7,7 +7,7 @@ import toolState from '@/store/toolState'
 import Brush from '@/tools/Brush'
 
 const Canvas = observer(() => {
-  const canvasRef = useRef(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -16,9 +16,15 @@ const Canvas = observer(() => {
     }
   }, [])
 
+  const handleMouseDown = (event: MouseEvent<HTMLCanvasElement>) => {
+    if (canvasRef.current) {
+      canvasState.pushToUndo(canvasRef.current.toDataURL())
+    }
+  }
+
   return (
     <div className="canvas">
-      <canvas ref={canvasRef} width={800} height={480}></canvas>
+      <canvas onMouseDown={handleMouseDown} ref={canvasRef} width={800} height={480}></canvas>
     </div>
   )
 })

@@ -1,17 +1,43 @@
-import Canvas from '@/components/Canvas'
-import SettingsBar from '@/components/SettingsBar'
-import Toolbar from '@/components/Toolbar'
+import { ReactNode } from "react";
+import {
+  Navigate,
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  useParams,
+} from "react-router-dom";
 
-import './styles/app.scss'
+import GenerealComponent from "./components/GeneralComponent";
+
+import "./styles/app.scss";
+
+const PermissionsRoute = ({ children }: { children: ReactNode }) => {
+  const params = useParams();
+
+  if (!params.id) {
+    return <Navigate to={`/f${(+new Date()).toString(16)}`} />;
+  }
+
+  return children;
+};
 
 const App = () => {
-  return (
-    <div className="app">
-      <Toolbar />
-      <SettingsBar />
-      <Canvas />
-    </div>
-  )
-}
+  const component = (
+    <PermissionsRoute>
+      <GenerealComponent />
+    </PermissionsRoute>
+  );
 
-export default App
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={component}>
+        <Route path=":id" element={component} />
+      </Route>
+    )
+  );
+
+  return <RouterProvider router={router} />;
+};
+
+export default App;
