@@ -60,6 +60,15 @@ const Toolbar = () => {
 
     tool && toolState.setTool(tool)
   }
+
+  const handleUndo = () => {
+    canvasState.undo()
+  }
+
+  const handleRedo = () => {
+    canvasState.redo()
+  }
+
   return (
     <div className="toolbar">
       <div>
@@ -82,11 +91,11 @@ const Toolbar = () => {
       </div>
 
       <div>
-        <button className="toolbar__btn">
+        <button className="toolbar__btn" onClick={handleUndo}>
           <UndoIcon />
         </button>
 
-        <button className="toolbar__btn">
+        <button className="toolbar__btn" onClick={handleRedo}>
           <RedoIcon />
         </button>
 
