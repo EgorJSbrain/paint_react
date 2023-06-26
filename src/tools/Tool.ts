@@ -1,9 +1,13 @@
 class Tool {
   canvas: HTMLCanvasElement | null = null
   ctx: CanvasRenderingContext2D | null = null
+  socket: WebSocket | null = null
+  sessionId: string = ''
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, socket: WebSocket, sessionId: string) {
     this.canvas = canvas
+    this.socket = socket
+    this.sessionId = sessionId
     this.ctx = canvas.getContext('2d')
     this.destroyEvents()
   }

@@ -16,33 +16,30 @@ import Rect from "@/tools/Rect";
 import Circle from "@/tools/Circle";
 import Line from "@/tools/Line";
 import Eraser from "@/tools/Eraser";
+import { Tools } from "@/constants/global";
 
 import "../styles/toolbar.scss";
-
-const enum Tools {
-  brush = "brush",
-  rect = "rect",
-  circle = "circle",
-  eraser = "eraser",
-  line = "line",
-}
+import { useCallback } from "react";
 
 const Toolbar = () => {
+  // const socket = canvasState.socket
+  const sessionId = canvasState.sessionId
+
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     toolState.setFillColor(e.target.value)
     toolState.setStrokeColor(e.target.value)
   }
 
-  const setTool = (toolType: Tools) => () => {
+  const setTool = useCallback((toolType: Tools) => () => {
     let tool;
 
-    if (canvasState.canvas) {
+    if (canvasState.canvas && canvasState.socket) {
       switch(toolType) {
         case Tools.brush:
-          tool = new Brush(canvasState.canvas)
+          tool = new Brush(canvasState.canvas, canvasState.socket, sessionId)
           break;
         case Tools.rect:
-          tool = new Rect(canvasState.canvas)
+          tool = new Rect(canvasState.canvas, canvasState.socket, sessionId)
           break;
         case Tools.circle:
           tool = new Circle(canvasState.canvas)
@@ -59,7 +56,7 @@ const Toolbar = () => {
     }
 
     tool && toolState.setTool(tool)
-  }
+  }, [canvasState.socket, sessionId])
 
   const handleUndo = () => {
     canvasState.undo()
