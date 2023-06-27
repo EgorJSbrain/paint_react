@@ -19,6 +19,14 @@ class Brush extends Tool {
 
   mouseUpHandler() {
     this.mouseDown = false
+
+    this.socket!.send(JSON.stringify({
+      method: 'draw',
+      id: this.sessionId,
+      figure: {
+          type: 'finish',
+      }
+  }))
   }
 
   mouseDownHandler(e: any) {
@@ -26,13 +34,13 @@ class Brush extends Tool {
     this.ctx?.beginPath()
     this.ctx?.moveTo(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop)
 
-    this.socket?.send(JSON.stringify({
-      method: 'draw',
-      id: this.sessionId,
-      figure: {
-        type: 'finish',
-      }
-    }))
+    // this.socket?.send(JSON.stringify({
+    //   method: 'draw',
+    //   id: this.sessionId,
+    //   figure: {
+    //     type: 'finish',
+    //   }
+    // }))
   }
 
   mouseMoveHandler(e: any) {
@@ -50,6 +58,7 @@ class Brush extends Tool {
   }
 
   static draw(ctx: CanvasRenderingContext2D, x: number, y: number) {
+    console.log('-----')
     ctx?.lineTo(x, y)
     ctx?.stroke()
   }
