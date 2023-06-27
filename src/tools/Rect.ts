@@ -67,12 +67,7 @@ class Rect extends Tool {
     img.src = this.saved;
 
     img.onload = () => {
-      this.ctx?.clearRect(
-        0,
-        0,
-        this.canvas?.width ?? 0,
-        this.canvas?.height ?? 0
-      );
+      this.ctx?.clearRect(0, 0, this.canvas?.width ?? 0, this.canvas?.height ?? 0);
       this.ctx?.drawImage(
         img,
         0,

@@ -22,33 +22,34 @@ import "../styles/toolbar.scss";
 import { useCallback } from "react";
 
 const Toolbar = () => {
-  // const socket = canvasState.socket
-  const sessionId = canvasState.sessionId
-
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     toolState.setFillColor(e.target.value)
     toolState.setStrokeColor(e.target.value)
   }
 
-  const setTool = useCallback((toolType: Tools) => () => {
+  const setTool = (toolType: Tools) => () => {
     let tool;
 
     if (canvasState.canvas && canvasState.socket) {
+      const canvas = canvasState.canvas
+      const socket = canvasState.socket
+      const sessionId = canvasState.sessionId
+
       switch(toolType) {
         case Tools.brush:
-          tool = new Brush(canvasState.canvas, canvasState.socket, sessionId)
+          tool = new Brush(canvas, socket, sessionId)
           break;
         case Tools.rect:
-          tool = new Rect(canvasState.canvas, canvasState.socket, sessionId)
+          tool = new Rect(canvas, socket, sessionId)
           break;
         case Tools.circle:
-          tool = new Circle(canvasState.canvas)
+          tool = new Circle(canvas)
           break;
         case Tools.line:
-          tool = new Line(canvasState.canvas)
+          tool = new Line(canvas)
           break;
         case Tools.eraser:
-          tool = new Eraser(canvasState.canvas)
+          tool = new Eraser(canvas)
           break;
         default:
           return undefined
@@ -56,7 +57,7 @@ const Toolbar = () => {
     }
 
     tool && toolState.setTool(tool)
-  }, [canvasState.socket, sessionId])
+  }
 
   const handleUndo = () => {
     canvasState.undo()
@@ -64,6 +65,18 @@ const Toolbar = () => {
 
   const handleRedo = () => {
     canvasState.redo()
+  }
+
+  const handleDownload = () => {
+    const dataUrl = canvasState.canvas?.toDataURL()
+    console.log("----", dataUrl)
+
+    const a = document.createElement('a')
+    a.href = dataUrl ?? ''
+    a.download = canvasState.sessionId + '.jpg'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
   }
 
   return (
@@ -96,7 +109,7 @@ const Toolbar = () => {
           <RedoIcon />
         </button>
 
-        <button className="toolbar__btn">
+        <button className="toolbar__btn" onClick={handleDownload}>
           <SaveIcon />
         </button>
       </div>
