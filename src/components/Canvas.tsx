@@ -11,6 +11,7 @@ import { Tools } from '@/constants/global'
 import Rect from '@/tools/Rect'
 
 import '../styles/canvas.scss'
+import Circle from '@/tools/Circle'
 
 const Canvas = observer(() => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -82,17 +83,28 @@ const Canvas = observer(() => {
     const ctx = canvasRef.current?.getContext('2d')
 
     if (ctx) {
-      switch(figure.type) {
+      switch (figure.type) {
         case Tools.brush:
-          Brush.draw(ctx, figure.x, figure.y)
+          Brush.draw(ctx, figure.x, figure.y);
 
           break;
         case Tools.rect:
-          Rect.staticDraw(ctx, figure.x, figure.y, figure.width, figure.height, figure.color)
+          Rect.staticDraw(
+            ctx,
+            figure.x,
+            figure.y,
+            figure.width,
+            figure.height,
+            figure.color
+          );
 
           break;
-        case 'finish':
-          ctx.beginPath()
+        case Tools.circle:
+          Circle.staticDraw(ctx, figure.x, figure.y, figure.radius, figure.color);
+
+          break;
+        case "finish":
+          ctx.beginPath();
           break;
       }
     }

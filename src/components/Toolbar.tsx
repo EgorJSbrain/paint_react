@@ -43,7 +43,7 @@ const Toolbar = () => {
           tool = new Rect(canvas, socket, sessionId)
           break;
         case Tools.circle:
-          tool = new Circle(canvas)
+          tool = new Circle(canvas, socket, sessionId)
           break;
         case Tools.line:
           tool = new Line(canvas)
@@ -69,7 +69,6 @@ const Toolbar = () => {
 
   const handleDownload = () => {
     const dataUrl = canvasState.canvas?.toDataURL()
-    console.log("----", dataUrl)
 
     const a = document.createElement('a')
     a.href = dataUrl ?? ''
