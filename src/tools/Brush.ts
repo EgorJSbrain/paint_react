@@ -33,14 +33,6 @@ class Brush extends Tool {
     this.mouseDown = true
     this.ctx?.beginPath()
     this.ctx?.moveTo(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop)
-
-    // this.socket?.send(JSON.stringify({
-    //   method: 'draw',
-    //   id: this.sessionId,
-    //   figure: {
-    //     type: 'finish',
-    //   }
-    // }))
   }
 
   mouseMoveHandler(e: any) {
