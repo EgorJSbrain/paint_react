@@ -46,7 +46,7 @@ const Toolbar = () => {
           tool = new Circle(canvas, socket, sessionId)
           break;
         case Tools.line:
-          tool = new Line(canvas)
+          tool = new Line(canvas, socket, sessionId)
           break;
         case Tools.eraser:
           tool = new Eraser(canvas)

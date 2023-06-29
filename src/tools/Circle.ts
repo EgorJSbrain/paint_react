@@ -23,24 +23,6 @@ class Circle extends Tool {
     this.canvas!.onmouseup = this.mouseUpHandler.bind(this);
   }
 
-  mouseUpHandler() {
-    this.mouseDown = false;
-
-    this.socket?.send(
-      JSON.stringify({
-        method: "draw",
-        id: this.sessionId,
-        figure: {
-          type: Tools.circle,
-          x: this.startX,
-          y: this.startY,
-          radius: this.radius,
-          color: this.ctx?.fillStyle,
-        },
-      })
-    );
-  }
-
   mouseDownHandler(e: any) {
     this.mouseDown = true;
     this.ctx?.beginPath();
@@ -61,6 +43,24 @@ class Circle extends Tool {
 
       this.draw(this.startX, this.startY, this.radius);
     }
+  }
+
+  mouseUpHandler() {
+    this.mouseDown = false;
+
+    this.socket?.send(
+      JSON.stringify({
+        method: "draw",
+        id: this.sessionId,
+        figure: {
+          type: Tools.circle,
+          x: this.startX,
+          y: this.startY,
+          radius: this.radius,
+          color: this.ctx?.fillStyle,
+        },
+      })
+    );
   }
 
   draw(x: number, y: number, radius: number) {

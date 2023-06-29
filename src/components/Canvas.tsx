@@ -12,6 +12,7 @@ import Rect from '@/tools/Rect'
 
 import '../styles/canvas.scss'
 import Circle from '@/tools/Circle'
+import Line from '@/tools/Line'
 
 const Canvas = observer(() => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -101,6 +102,10 @@ const Canvas = observer(() => {
           break;
         case Tools.circle:
           Circle.staticDraw(ctx, figure.x, figure.y, figure.radius, figure.color);
+
+          break;
+        case Tools.line:
+          Line.staticDraw(ctx, figure.x, figure.y, figure.lineX, figure.lineY, figure.color);
 
           break;
         case "finish":

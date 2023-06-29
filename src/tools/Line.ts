@@ -1,3 +1,4 @@
+import { Tools } from "@/constants/global"
 import Tool from "./Tool"
 
 class Line extends Tool {
@@ -5,10 +6,12 @@ class Line extends Tool {
   canvas: HTMLCanvasElement | null = null
   currentX = 0
   currentY = 0
+  lineX = 0
+  lineY = 0
   saved = ''
 
-  constructor(canvas: HTMLCanvasElement) {
-    super(canvas)
+  constructor(canvas: HTMLCanvasElement, socket: WebSocket, sessionId: string) {
+    super(canvas, socket, sessionId)
     this.canvas = canvas
     this.listen()
   }
@@ -31,12 +34,29 @@ class Line extends Tool {
 
   mouseMoveHandler(e: any) {
     if (this.mouseDown) {
+      this.lineX = e.pageX - e.target.offsetLeft
+      this.lineY = e.pageY - e.target.offsetTop
       this.draw(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop)
     }
   }
 
   mouseUpHandler() {
     this.mouseDown = false
+
+    this.socket?.send(
+      JSON.stringify({
+        method: "draw",
+        id: this.sessionId,
+        figure: {
+          type: Tools.line,
+          x: this.currentX,
+          y: this.currentY,
+          lineX: this.lineX,
+          lineY: this.lineY,
+          color: this.ctx?.fillStyle
+        },
+      })
+    );
   }
 
   draw(x: number, y: number) {
@@ -51,6 +71,21 @@ class Line extends Tool {
       this.ctx?.lineTo(x, y)
       this.ctx?.stroke()
     }
+  }
+
+  static staticDraw(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    lineX: number,
+    lineY: number,
+    color: string
+  ) {
+    ctx.fillStyle = color
+    ctx.beginPath();
+    ctx.moveTo(lineX, lineY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
   }
 }
 
