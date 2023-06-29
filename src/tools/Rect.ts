@@ -22,25 +22,6 @@ class Rect extends Tool {
     this.canvas!.onmouseup = this.mouseUpHandler.bind(this);
   }
 
-  mouseUpHandler(e: any) {
-    this.mouseDown = false;
-
-    this.socket?.send(
-      JSON.stringify({
-        method: "draw",
-        id: this.sessionId,
-        figure: {
-          type: Tools.rect,
-          x: this.startX,
-          y: this.startY,
-          width: this.width,
-          height: this.height,
-          color: this.ctx?.fillStyle
-        },
-      })
-    );
-  }
-
   mouseDownHandler(e: any) {
     this.mouseDown = true;
     this.ctx?.beginPath();
@@ -60,6 +41,25 @@ class Rect extends Tool {
 
       this.draw(this.startX, this.startY, this.width, this.height);
     }
+  }
+
+  mouseUpHandler(e: any) {
+    this.mouseDown = false;
+
+    this.socket?.send(
+      JSON.stringify({
+        method: "draw",
+        id: this.sessionId,
+        figure: {
+          type: Tools.rect,
+          x: this.startX,
+          y: this.startY,
+          width: this.width,
+          height: this.height,
+          color: this.ctx?.fillStyle
+        },
+      })
+    );
   }
 
   draw(x: number, y: number, w: number, h: number) {

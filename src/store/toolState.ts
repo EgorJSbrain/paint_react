@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class ToolState {
-  tool = null
+  tool: any | null = null
 
   constructor() {
     makeAutoObservable(this)
