@@ -1,12 +1,11 @@
 import Brush from "./Brush"
 
 class Eraser extends Brush {
-  constructor(canvas: HTMLCanvasElement) {
-    super(canvas)
+  constructor(canvas: HTMLCanvasElement, socket: WebSocket, sessionId: string) {
+    super(canvas, socket, sessionId)
   }
 
   draw = (x: number, y: number) => {
-    this.ctx!.strokeStyle = 'white'
     this.ctx?.lineTo(x, y)
     this.ctx?.stroke()
   }
