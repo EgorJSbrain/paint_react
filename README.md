@@ -9,3 +9,5 @@ For runing project
 2. clone backe-end https://github.com/EgorJSbrain/websokets_back-end
 3. start front: yanr run dev
 4. start back: yanr run dev 
+
+For painting colobaretavily copy link from url and open this link in enother page, set your name and you can paint
