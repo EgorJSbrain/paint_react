@@ -4,11 +4,13 @@ import Tool from "./Tool"
 class Brush extends Tool {
   mouseDown: boolean = false
   canvas: HTMLCanvasElement | null = null
+  color: string = ''
 
-  constructor(canvas: HTMLCanvasElement, socket: WebSocket, sessionId: string) {
+  constructor(canvas: HTMLCanvasElement, socket: WebSocket, sessionId: string, color?: string) {
     super(canvas, socket, sessionId)
     this.canvas = canvas
     this.listen()
+    this.color = color ?? ''
   }
 
   listen() {
@@ -50,7 +52,6 @@ class Brush extends Tool {
   }
 
   static draw(ctx: CanvasRenderingContext2D, x: number, y: number) {
-    console.log('-----')
     ctx?.lineTo(x, y)
     ctx?.stroke()
   }

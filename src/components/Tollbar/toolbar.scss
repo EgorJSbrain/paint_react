@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "../../styles/variables.scss";
 
 .toolbar {
   display: flex;
@@ -10,7 +10,7 @@
   height: $toolbar-height;
   z-index: 1;
   background-color: $white-color;
-  box-shadow: $shadow;
+  border-bottom: 1px solid grey;
 
   & > div {
     display: flex;

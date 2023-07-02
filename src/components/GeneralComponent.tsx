@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Canvas from "./Canvas";
-import SettingsBar from "./SettingsBar";
-import Toolbar from "./Toolbar";
-import StartFrom from "./StartForm";
+import StartFrom from "./StartFrom/StartForm";
 import canvasState from "@/store/canvasState";
+import Toolbar from "./Tollbar/Toolbar";
+import SettingsBar from "./SettingsBar/SettingsBar";
+import Canvas from "./Canvas/Canvas";
 
 const GeneralComponent = () => {
   const [isInit, setIsInit] = useState<boolean>(true)
@@ -14,18 +14,16 @@ const GeneralComponent = () => {
   }
 
   return (
-    <div className="app">
-      <>
-        {isInit && <StartFrom onConfirm={submitName} />}
-        {!isInit && (
-          <>
-            <Toolbar />
-            <SettingsBar />
-            <Canvas />
-          </>
-        )}
-      </>
-    </div>
+    <>
+      {isInit && <StartFrom onConfirm={submitName} />}
+      {!isInit && (
+        <>
+          <Toolbar />
+          <SettingsBar />
+          <Canvas />
+        </>
+      )}
+    </>
   );
 };
 

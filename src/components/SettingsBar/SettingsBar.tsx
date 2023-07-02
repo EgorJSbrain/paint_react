@@ -1,5 +1,5 @@
 import toolState from '@/store/toolState'
-import '../styles/settings-bar.scss'
+import './settings-bar.scss'
 
 const SettingsBar = () => {
   const handleLineWidhtChange = (e: React.ChangeEvent<HTMLInputElement>) => {

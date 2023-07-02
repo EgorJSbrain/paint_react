@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+
+.start-form {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 400px;
+    row-gap: 24px;
+  }
+
+  &_content-title {
+    text-align: center;
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+  }
+
+  button {
+    padding: 8px;
+    cursor: pointer;
+  }
+}

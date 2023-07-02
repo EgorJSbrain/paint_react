@@ -18,8 +18,7 @@ import Line from "@/tools/Line";
 import Eraser from "@/tools/Eraser";
 import { Tools } from "@/constants/global";
 
-import "../styles/toolbar.scss";
-import { useCallback } from "react";
+import "./toolbar.scss";
 
 const Toolbar = () => {
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +48,7 @@ const Toolbar = () => {
           tool = new Line(canvas, socket, sessionId)
           break;
         case Tools.eraser:
-          tool = new Eraser(canvas)
+          tool = new Eraser(canvas, socket, sessionId)
           break;
         default:
           return undefined

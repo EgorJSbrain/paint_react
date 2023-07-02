@@ -1,12 +1,13 @@
-@import "./variables.scss";
+@import "../../styles/variables.scss";
 
 .settings-bar {
   height: $toolbar-height;
+  width: 100%;
   display: flex;
   align-items: center;
+  padding: 0px 32px;
   position: absolute;
-  width: 100%;
-  background-color: $white-color;
   top: $toolbar-height;
+  background-color: $white-color;
   box-shadow: $shadow;
 }

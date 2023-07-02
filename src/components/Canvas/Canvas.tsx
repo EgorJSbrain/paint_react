@@ -10,9 +10,9 @@ import Brush from '@/tools/Brush'
 import { Tools } from '@/constants/global'
 import Rect from '@/tools/Rect'
 
-import '../styles/canvas.scss'
 import Circle from '@/tools/Circle'
 import Line from '@/tools/Line'
+import './canvas.scss'
 
 const Canvas = observer(() => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
